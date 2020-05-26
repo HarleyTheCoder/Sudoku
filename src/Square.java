@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,13 +21,13 @@ import javax.swing.border.Border;
 public class Square extends JPanel {
 	
 	private Border squareBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
-	private JTextField textField = new JTextField();
+	private JFormattedTextField textField = new JFormattedTextField();
 	private JLabel solidLabel = new JLabel();
 	private Font SOLID_FONT = new Font("Serif", Font.PLAIN, 30); //display font
 	private Font INPUT_FONT = new Font("Serif", Font.PLAIN, 30); //display font
 	private String RANGE_REGEX = "[0-9]"; //range that can be entered
-	private int WIDTH = 50; 
-	private int HEIGHT = 50;
+	private int WIDTH = 45; 
+	private int HEIGHT = 45;
 	private String entryText = ""; //if you enter text
 	private boolean isSolid; //if text can be entered or not
 	private int value; //Value of the square
@@ -40,6 +41,7 @@ public class Square extends JPanel {
 	public Square(int value, boolean isSolid) {
 		this.value = value;
 		this.isSolid = isSolid;
+		
 		this.setSize(WIDTH, HEIGHT);
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		this.setBorder(squareBorder);
@@ -86,6 +88,11 @@ public class Square extends JPanel {
 		solidLabel.setFont(SOLID_FONT);
 		solidLabel.setForeground(Color.BLACK);
 		solidLabel.setVisible(false);
+	}
+	
+	public void setNewText(int value) {
+		this.value = value;
+		solidLabel.setText(value + "");
 	}
 	
 	//Set square's value to visible

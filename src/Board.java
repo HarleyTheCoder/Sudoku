@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,23 +17,29 @@ public class Board extends JBoard {
 	HashMap <Integer, List<Square>> groupsHM = new HashMap<>();
 	HashMap <Integer, List<Square>> columnsHM = new HashMap<>();
 	HashMap <Integer, List<Square>> rowsHM = new HashMap<>();
-	private int[] coordinates = {0, 50, 100, 150, 200, 250, 300, 350, 400};
+	private int[] coordinates = {0, 42, 84, 126, 168, 210, 252, 294, 336};
+	boolean isLoaded = false;
+
+	
+	
 	
 	public Board() {
+		
+		super();
+		
 		//Add squares to panel
 		int counter = 0;
 		for (int a = 0; a < 9; a++) {
 			for (int b = 0; b < 9; b++) {
-				//randomize for now
 				int value = 0;
 				boolean solid = true;
 				String sPosition = (a + 1) + "" + (b + 1);
 				int position = Integer.parseInt(sPosition);
 				squaresLs.add(new Square(value, solid));
 				squaresLs.get(counter).setPosition(position);
-				squaresLs.get(counter).setBounds(coordinates[a], coordinates[b], 50, 50);
+				squaresLs.get(counter).setBounds(coordinates[a], coordinates[b], 42, 42);
 				squares[a][b] = squaresLs.get(counter);
-				super.add(squaresLs.get(counter));
+				//super.add(squaresLs.get(counter));
 				counter++;
 			}
 		}
@@ -111,6 +118,9 @@ public class Board extends JBoard {
 				groupsHM.put(33, group33);
 			}
 		}
+		
+		//Add groups to board
+		super.addH(groupsHM);
 		
 		//Set up columnsHM
 		List<Square> column1 = new ArrayList<>();
@@ -217,6 +227,31 @@ public class Board extends JBoard {
 		
 	}
 	
+	public void setNewNums() {
+		int[][] newNums = GameMethods.getFromFile();
+		for (int i = 0; i < 9; i++) {
+			for (int n = 0; n < 9; n++) {
+				squares[i][n].setNewText(newNums[i][n]);
+				updateAll(squares[i][n]);
+			}
+		}
+		refreshBoard();
+	}
+	
+	
+	
+	public boolean isLoaded() {
+		return isLoaded;
+	}
+
+
+
+	public void setLoaded(boolean isLoaded) {
+		this.isLoaded = isLoaded;
+	}
+
+
+
 	//Print board
 	public void printBoard() {
 		System.out.println(squares[0][0].getValue() + " " + squares[0][1].getValue()+ " " + squares[0][2].getValue() + "|" +

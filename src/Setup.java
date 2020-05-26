@@ -63,7 +63,7 @@ public class Setup {
 	//It will reset a value if no solutions are available for a square
 	
 	//GENERATE BOARD
-	public static void genBoard(Board board) {
+	public static void genBoard( Board board) {
 		
 		
 		int counter = 0; //counting steps
@@ -87,8 +87,6 @@ public class Setup {
 		for (int i = 0; i < board.getSquaresLs().size(); i++) {
 			if (board.getSquaresLs().get(i).getValue() == 0) {
 				spotsLeft.add(board.getSquaresLs().get(i).getPosition());
-				
-				System.out.print(board.getSquaresLs().get(i).getPosition() + " "); //test
 			}
 		}
 		
@@ -130,7 +128,6 @@ public class Setup {
 			*/
 			
 			
-			System.out.println("\nSpot: " + spot); //test
 			
 			//test if it's solvable yet
 			int canSolve = isSolvable(board);
@@ -142,11 +139,6 @@ public class Setup {
 				solutions = genSolutions(board.getSquareHM().get(spot), board);
 				
 				if (!solutions.isEmpty()) {
-					System.out.print("Possible solutions: ");
-					for (int sol: solutions) {
-						System.out.print(sol + " ");  //test
-					}
-					System.out.println();
 					
 					tempNum = solutions.size() - 1;
 				}
@@ -177,7 +169,6 @@ public class Setup {
 					solution = solutions.get(genRandomInRange(solutions.size()) - 1);
 				}
 				
-				System.out.println("\nSolution: " + solution); //test
 				
 				Square sq = board.getSquareHM().get(spot); //temporary square
 				//If the above doesn't work, turn it back to how it was
@@ -206,9 +197,7 @@ public class Setup {
 			}
 			
 			if (!spotsLeft.isEmpty()) {
-				System.out.println("Empties left: " + empties + "\n"); //test
 			}
-			board.printBoard(); //test
 			if (isSolved) {
 				spotsLeft.clear();
 			}
